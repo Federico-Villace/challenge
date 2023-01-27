@@ -1,5 +1,10 @@
-# Prueba tecnica # Test
+# Test / Prueba Tecnica 
 
+English: 
+Test to practice for live coding: state handling, hooks, custom hooks, fetching data, styles and some extra basic stuff.
+
+Español:
+Prueba tecnica para practicar live coding: manejo de estados, hooks, custom hooks, fetching data, estilos css y extras.  
 
 ## APIs: 
 - Facts Random: https://catfact.ninja/fact 
