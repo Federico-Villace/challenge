@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CAT_PREFIX_IMAGE_URL } from './utils/links'
+import '../style.css'
 
 export const App = () => {
   const [fact, setfact] = useState('')
@@ -30,8 +31,11 @@ export const App = () => {
   return (
     <main>
       <h1>Kittens App </h1>
-      {fact && <p>{fact}</p>}
-      {img && <img src={`${CAT_PREFIX_IMAGE_URL}${img}`} alt='images of cats that I received from the api' />}
+      <section>
+
+        {fact && <p>{fact}</p>}
+        {img && <img src={`${CAT_PREFIX_IMAGE_URL}${img}`} alt='images of cats that I received from the api' />}
+      </section>
     </main>
   )
 }
