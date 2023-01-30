@@ -8,6 +8,14 @@ export const App = () => {
   const [randomWords, setRandomWords] = useState()
   const catRandomUrl = `https://cataas.com/cat/says/${randomWords}?size=50&color=red&json=true`
 
+  const handleImg = () => {
+    fetch(catRandomUrl)
+      .then(response => response.json())
+      .then(data => {
+        setImg(data.url)
+      })
+  }
+
   useEffect(() => {
     fetch('https://catfact.ninja/fact')
       .then(response => response.json())
@@ -21,11 +29,7 @@ export const App = () => {
 
   useEffect(() => {
     if (!randomWords) return
-    fetch(catRandomUrl)
-      .then(response => response.json())
-      .then(data => {
-        setImg(data.url)
-      })
+    handleImg()
   }, [fact])
 
   return (
@@ -35,6 +39,7 @@ export const App = () => {
 
         {fact && <p>{fact}</p>}
         {img && <img src={`${CAT_PREFIX_IMAGE_URL}${img}`} alt='images of cats that I received from the api' />}
+        <button onClick={handleImg}> Change Photo </button>
       </section>
     </main>
   )
