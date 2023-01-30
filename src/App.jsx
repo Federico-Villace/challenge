@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { CAT_PREFIX_IMAGE_URL } from './utils/links'
+import { CAT_PREFIX_IMAGE_URL, CAT_FACT_URL } from './utils/links'
 import '../style.css'
 
-export const App = () => {
+function useGetFact (url) {
   const [fact, setfact] = useState('')
-  const [img, setImg] = useState()
   const [randomWords, setRandomWords] = useState()
-  const catRandomUrl = `https://cataas.com/cat/says/${randomWords}?size=50&color=red&json=true`
-
-  const handleImg = () => {
-    fetch(catRandomUrl)
-      .then(response => response.json())
-      .then(data => {
-        setImg(data.url)
-      })
-  }
 
   useEffect(() => {
-    fetch('https://catfact.ninja/fact')
+    fetch(url)
       .then(response => response.json())
       .then(data => {
         const { fact } = data
@@ -26,6 +16,20 @@ export const App = () => {
         setRandomWords(wordsSelected)
       })
   }, [])
+  return { fact, randomWords }
+}
+
+export const App = () => {
+  const [img, setImg] = useState()
+  const { fact, randomWords } = useGetFact(CAT_FACT_URL)
+  const catRandomUrl = `https://cataas.com/cat/says/${randomWords}?size=50&color=red&json=true`
+
+  const handleImg = async () => {
+    const res = await fetch(catRandomUrl)
+    const data = await res.json()
+    const { url } = data
+    setImg(url)
+  }
 
   useEffect(() => {
     if (!randomWords) return

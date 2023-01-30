@@ -29,3 +29,7 @@ section img {
   max-height: 300px;
   margin: 10px;
 }
+
+section button {
+  border-radius: 5%;
+}
